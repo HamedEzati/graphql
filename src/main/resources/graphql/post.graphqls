@@ -1,0 +1,31 @@
+input PostInputModel {
+    title: String!
+    text: String!
+    category: String
+}
+
+type PostOutputModel {
+    id: ID
+    title: String
+    text: String
+    category: String
+    author: AuthorOutputModel
+}
+
+type AuthorOutputModel {
+    id: String
+    name: String
+    thumbnail: String
+    posts: [PostOutputModel]
+}
+
+# The Root Query for the application
+type Query {
+    recentPosts(count: Int, offset: Int): [PostOutputModel]
+    getPostById(postId: String): PostOutputModel
+}
+
+# The Root Mutation for the application
+type Mutation {
+    writePost(postInputModel: PostInputModel!) : PostOutputModel
+}
